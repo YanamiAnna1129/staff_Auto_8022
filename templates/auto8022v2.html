@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kisara的家</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_8022v2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    
+</head>
+<body>
+    <header>
+        <nav>
+            <li><a href="/">首页</a></li>
+            <li><a href="/about">关于</a></li>
+            <li><a href="/auto8022">自动8022</a></li>
+        </nav>
+    </header>
+
+    <div class="none"></div>
+    <div class="main">
+        <h1 style="margin: 0;">欢迎回家，{{ name }} </h1>
+        <nav class="info_nav">
+            <li><a href="https://github.com/Kisara0930/staff_Auto_8022" target="_blank">项目地址</a></li>
+            <li><a href="#introduction">使用说明</a></li>
+            <li><a href="#more">加入我们</a></li>
+        </nav>
+    </div>
+    <div class="info_list">
+<table>
+    <tr><th>作业编号</th><th>练习名称</th><th>创建时间</th><th>完成时间</th><th>完成状态</th><th>成绩</th><th>操作</th></tr>
+    {% for info in info_list %}
+    <tr>
+        <td>{{ info['num'] }}</td>
+        <td>{{ info['qulzname'] }}</td>
+        <td>{{ info['createTime'] }}</td>
+        <td>{{ info['submitTime'] }}</td>
+        <td>{{ info['status'] }}</td>
+        <td>{{ info['score'] }}</td>
+        <td>
+            <form method="POST" action="/complete_quiz" onsubmit="disableSubmit(this)">
+                <input type="hidden" name="num" value="{{ info['num'] }}">
+                <button type="submit">一键完成</button>
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+    </div>
+<div id="introduction">
+    <h2>使用说明</h2>
+    <p>点击一键完成即可使用, 退出账号把浏览器关掉就行了</p>
+    <h2>注意事项</h2>
+    <p>不要刷新!!! 请不要手动刷新, 因为我不是用ajax请求</p>
+    <h2>会被封号吗?</h2>
+    <p>本项目遵循友好爬虫协议 (Robots Exclusion Protocol), 不会被封号<br>
+    <details>
+        <summary>详见此处</summary>
+        <p>你8022网站没有robots.txt, 如果网站根目录下没有 robots.txt 文件，这通常意味着搜索引擎爬虫可以自由地抓取和索引网站上的所有内容。
+            写8022的也是神人了, 能把quiz拼成qulz真的无敌了
+        </p>
+    </details></p>
+</div>
+<div id="more">
+    <h2>我能为这个项目做什么</h2>
+    <p><del>你可以帮我买一个域名, 一年只要一块钱</del>, 或者为这个项目增加更多的功能</p>
+    <p><a href="https://github.com/Kisara0930/staff_Auto_8022" target="_blank">项目地址</a></p>
+    <p><a href="https://space.bilibili.com/542971991" target="_blank">联系方式</a></p>
+</div>
+
+<script>
+function disableSubmit(form) {
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;    
+    btn.textContent = "完成中..."; 
+    btn.classList.add('disabled-btn');
+}
+</script>
+
+</body>
+</html>

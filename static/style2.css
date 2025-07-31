@@ -1,0 +1,33 @@
+.main p {
+    text-align: center;
+    align-items: center;
+    font-size: 20px;
+    width: 325px;
+    margin: 0 auto; 
+    overflow: hidden;
+    white-space: nowrap;
+
+}
+
+
+@keyframes grow {
+    from {
+        width: 0;
+    }
+    to {
+        width: 325px;
+    }
+}
+@keyframes blink {
+    from {
+        border-right: 3px solid brown;
+        border-right-color: brown;
+    }
+    to {
+        border-right-color: transparent;
+    }
+}
+.animation {
+    animation: grow 1.75s steps(36) 0.3s normal both,
+    blink 0.8s 0s 3 both;
+}

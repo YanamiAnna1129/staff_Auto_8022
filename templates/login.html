@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kisara的家</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_login.css') }}">
+
+</head>
+<body>
+    <header>
+        <nav>
+            <li><a href="/">首页</a></li>
+            <li><a href="/about">关于</a></li>
+            <li><a href="/auto8022">自动8022</a></li>
+        </nav>
+    </header>
+
+    <div class="none"></div>
+    <div class="main">
+        <h1 style="margin-top: 0px;">登录</h1>
+        
+        <form action="/check" method="post" onsubmit="disableSubmit(this)">
+            <input type="text" name="self_account" placeholder="自己的账号"><br>
+            <input type="text" name="self_password" placeholder="自己的密码" value="yk654321"><br>
+            <input type="text" name="other_account" placeholder="对方的账号"><br>
+            <input type="text" name="other_password" placeholder="对方的密码" value="yk654321"><br>
+            <input type="submit" value="submit">
+        </form>
+        <p>错误提示: {{ get_flashed_messages(with_categories=False, category_filter=()) }}</p>
+        <p>预计登入时间2~30s</p>
+        <p>登入之后报错那是学校服务器的问题<br> 不是我的问题 <br> 多试几次就好了</p>
+    </div>
+
+    <script>
+    function disableSubmit(form) {
+    const btn = form.querySelector('input[type="submit"]');
+    btn.disabled = true;
+    btn.value = "正在登入...";
+    }
+    </script>
+
+</body>
+</html>
